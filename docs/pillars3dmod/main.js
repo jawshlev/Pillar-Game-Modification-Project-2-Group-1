@@ -24,6 +24,11 @@ const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
 const PILLAR_FREQ = 30; // Lower number = more pillars
 const YELLOW_FREQ = 9;
+const RED_CHANCE = 10; // The chance a yellow pillar becomes red
+
+function getNextPillarColor() {
+  return (Math.random() * 100) + 1 < RED_CHANCE ? "red" : "yellow";
+}
 
 function update() {
   if (!ticks) {
@@ -40,7 +45,7 @@ function update() {
       x: rnds(60, 160),
       z: 20,
       size: vec(rnd(50, 100), rnd(70, 180)),
-      color: nextYellowPillar < 0 ? "yellow" : "black",
+      color: nextYellowPillar < 0 ? getNextPillarColor() : "black",
     });
     nextPillarTicks = PILLAR_FREQ / difficulty;
     if (nextYellowPillar < 0) {
