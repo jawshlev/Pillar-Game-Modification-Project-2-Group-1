@@ -44,7 +44,7 @@ function update() {
     });
     nextPillarTicks = PILLAR_FREQ / difficulty;
     if (nextYellowPillar < 0) {
-      nextYellowPillar = 9;
+      nextYellowPillar = YELLOW_FREQ;
     }
   }
   color("light_black");
