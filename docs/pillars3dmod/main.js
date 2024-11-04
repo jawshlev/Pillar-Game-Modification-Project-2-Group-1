@@ -23,11 +23,11 @@ let multiplier;
 const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
 const PILLAR_FREQ = 30; // Lower number = more pillars
-const SPECIAL_FREQ = 9;
-const RED_CHANCE = 10; // The chance a special pillar becomes red
+const SPECIAL_FREQ = 5;
+const FAKE_CHANCE = 50; // The chance a special pillar is a fake pillar
 
 function getNextPillarColor() {
-  return (Math.random() * 100) + 1 < RED_CHANCE ? "red" : "yellow";
+  return (Math.random() * 100) + 1 < FAKE_CHANCE ? "light_yellow" : "yellow";
 }
 
 function update() {
@@ -74,7 +74,7 @@ function update() {
       ).isColliding.text.T
     ) {
       const ty = p.size.y / 3 / p.z + 60 - p.size.y / p.z / 2;
-      if (vy > 0) {
+      if (vy > 0 && p.color != "red") {
         play("laser");
         vy = -JUMP_FACTOR * sqrt(difficulty);
         if (pos.y > ty) {
