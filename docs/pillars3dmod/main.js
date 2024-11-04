@@ -20,6 +20,9 @@ let pos;
 let vy;
 let multiplier;
 
+const GRAVITY_FACTOR = .05;
+const JUMP_FACTOR = 2;
+
 function update() {
   if (!ticks) {
     pillars = [{ x: 0, z: 20, size: vec(100, 100), color: "yellow" }];
@@ -47,7 +50,7 @@ function update() {
   color("black");
   pos.x = clamp(input.pos.x, 6, 93);
   pos.y += vy;
-  vy += 0.1 * difficulty;
+  vy += GRAVITY_FACTOR * difficulty;
   text("TT", pos.x - 3, pos.y).isColliding.rect;
   if (pos.y > 95) {
     play("explosion");
@@ -66,7 +69,7 @@ function update() {
       const ty = p.size.y / 3 / p.z + 60 - p.size.y / p.z / 2;
       if (vy > 0) {
         play("laser");
-        vy = -2.5 * sqrt(difficulty);
+        vy = -JUMP_FACTOR * sqrt(difficulty);
         if (pos.y > ty) {
           pos.y = ty;
         }
