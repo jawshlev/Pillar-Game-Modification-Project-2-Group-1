@@ -74,14 +74,14 @@ function update() {
       ).isColliding.text.T
     ) {
       const ty = p.size.y / 3 / p.z + 60 - p.size.y / p.z / 2;
-      if (vy > 0 && p.color != "red") {
+      if (vy > 0 && p.color != "light_yellow") {
         play("laser");
         vy = -JUMP_FACTOR * sqrt(difficulty);
         if (pos.y > ty) {
           pos.y = ty;
         }
+        addScore(multiplier, p.x / p.z + 50, ty);
       }
-      addScore(multiplier, p.x / p.z + 50, ty);
       if (p.color === "yellow") {
         play("select");
         multiplier++;
