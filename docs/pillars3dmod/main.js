@@ -47,7 +47,7 @@ function update() {
       nextYellowPillar = 9;
     }
   }
-  color("light_black");
+  color("light_red");
   rect(0, 60, 100, 1);
   color("black");
   pos.x = clamp(input.pos.x, 6, 93);
