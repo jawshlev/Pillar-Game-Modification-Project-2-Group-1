@@ -22,11 +22,12 @@ let multiplier;
 
 const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
+const YELLOW_FREQ = 9;
 
 function update() {
   if (!ticks) {
     pillars = [{ x: 0, z: 20, size: vec(100, 100), color: "yellow" }];
-    nextPillarTicks = nextYellowPillar = 9;
+    nextPillarTicks = nextYellowPillar = YELLOW_FREQ;
     pos = vec(50, 10);
     vy = 0;
     multiplier = 1;
