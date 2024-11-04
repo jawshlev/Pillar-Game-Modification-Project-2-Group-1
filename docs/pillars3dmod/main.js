@@ -15,7 +15,7 @@ options = {
 /** @type {{x: number, z: number, size: Vector, color: Color}[]} */
 let pillars;
 let nextPillarTicks;
-let nextYellowPillar;
+let nextSpecialPillar;
 let pos;
 let vy;
 let multiplier;
@@ -23,8 +23,8 @@ let multiplier;
 const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
 const PILLAR_FREQ = 30; // Lower number = more pillars
-const YELLOW_FREQ = 9;
-const RED_CHANCE = 10; // The chance a yellow pillar becomes red
+const SPECIAL_FREQ = 9;
+const RED_CHANCE = 10; // The chance a special pillar becomes red
 
 function getNextPillarColor() {
   return (Math.random() * 100) + 1 < RED_CHANCE ? "red" : "yellow";
@@ -33,23 +33,23 @@ function getNextPillarColor() {
 function update() {
   if (!ticks) {
     pillars = [{ x: 0, z: 20, size: vec(100, 100), color: "yellow" }];
-    nextPillarTicks = nextYellowPillar = YELLOW_FREQ;
+    nextPillarTicks = nextSpecialPillar = SPECIAL_FREQ;
     pos = vec(50, 10);
     vy = 0;
     multiplier = 1;
   }
   nextPillarTicks--;
   if (nextPillarTicks < 0) {
-    nextYellowPillar--;
+    nextSpecialPillar--;
     pillars.unshift({
       x: rnds(60, 160),
       z: 20,
       size: vec(rnd(50, 100), rnd(70, 180)),
-      color: nextYellowPillar < 0 ? getNextPillarColor() : "black",
+      color: nextSpecialPillar < 0 ? getNextPillarColor() : "black",
     });
     nextPillarTicks = PILLAR_FREQ / difficulty;
-    if (nextYellowPillar < 0) {
-      nextYellowPillar = YELLOW_FREQ;
+    if (nextSpecialPillar < 0) {
+      nextSpecialPillar = SPECIAL_FREQ;
     }
   }
   color("light_red");
