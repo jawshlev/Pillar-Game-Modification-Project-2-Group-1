@@ -22,6 +22,7 @@ let multiplier;
 
 const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
+const PILLAR_FREQ = 30; // Lower number = more pillars
 const YELLOW_FREQ = 9;
 
 function update() {
@@ -41,7 +42,7 @@ function update() {
       size: vec(rnd(50, 100), rnd(70, 180)),
       color: nextYellowPillar < 0 ? "yellow" : "black",
     });
-    nextPillarTicks = 20 / difficulty;
+    nextPillarTicks = PILLAR_FREQ / difficulty;
     if (nextYellowPillar < 0) {
       nextYellowPillar = 9;
     }
