@@ -52,7 +52,7 @@ function update() {
       nextSpecialPillar = SPECIAL_FREQ;
     }
   }
-  color("light_red");
+  color("light_black");
   rect(0, 60, 100, 1);
   color("black");
   pos.x = clamp(input.pos.x, 6, 93);
