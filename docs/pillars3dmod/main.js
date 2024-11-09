@@ -19,6 +19,9 @@ let nextSpecialPillar;
 let pos;
 let vy;
 let multiplier;
+let bird; 
+let birdDirection; 
+let birdTimer = 0;
 
 const GRAVITY_FACTOR = .05;
 const JUMP_FACTOR = 2;
@@ -37,7 +40,45 @@ function update() {
     pos = vec(50, 10);
     vy = 0;
     multiplier = 1;
+
+    bird = { x: 120, y: 5, vy: 1 };
+    birdDirection = -1; 
   }
+
+
+  if (birdTimer > 0) {
+    birdTimer--; 
+  } else {
+    bird.x += birdDirection * difficulty;
+    bird.y = 20 + Math.sin(ticks / 30) * 4; 
+
+    if (bird.x < -20) {
+      bird.x = 120; 
+      birdTimer = rnd(180, 360); // random wait time between 3-6 seconds
+    }
+  }
+
+  if (birdTimer <= 0) {
+    color("blue");
+    char("a", bird.x, bird.y); 
+  }
+
+  if (
+    pos.x < bird.x + 5 && pos.x + 5 > bird.x &&
+    pos.y < bird.y + 5 && pos.y + 5 > bird.y
+  ) {
+    if (pos.y < bird.y) {
+      vy = -JUMP_FACTOR * sqrt(difficulty);
+      multiplier++;
+      play("select");
+      birdTimer = rnd(300, 600);
+      bird.x = -20; 
+    } else {
+      play("explosion");
+      end();
+    }
+  }
+
   nextPillarTicks--;
   if (nextPillarTicks < 0) {
     nextSpecialPillar--;
