@@ -21,10 +21,10 @@ let vy;
 let multiplier;
 let bird; 
 let birdDirection; 
-let birdTimer = 0;
+let birdTimer = 360; // Initial spawn wait time of 6 seconds
 
-const GRAVITY_FACTOR = .05;
-const JUMP_FACTOR = 2;
+const GRAVITY_FACTOR = .07;
+const JUMP_FACTOR = 2.5;
 const PILLAR_FREQ = 30; // Lower number = more pillars
 const SPECIAL_FREQ = 5;
 const FAKE_CHANCE = 50; // The chance a special pillar is a fake pillar
